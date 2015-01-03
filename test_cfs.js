@@ -1,6 +1,21 @@
 FS.debug = true;
 Images = new FS.Collection("images", {
-    stores: [new FS.Store.FileSystem("images", {path: 'public/usr_img/test'})]
+    stores: [new FS.Store.FileSystem("images", {path: '~/public/usr_img/test'})]
+});
+
+Images.allow({
+  insert: function () {
+    return true;
+  },
+  update: function () {
+    return true;
+  },
+  remove: function () {
+    return true;
+  },
+  download: function () {
+    return true;
+  }
 });
 
 
@@ -8,8 +23,6 @@ if (Meteor.isClient){
 
   Template.hello.helpers({
     fshttp: function (){
-        //console.log(FS.HTTP.uploadUrl);
-        //FS.HTTP.uploadUrl = 'http://192.168.1.5:3000/cfs/files';
         return FS.HTTP.uploadUrl;
     }
   });
@@ -18,6 +31,14 @@ if (Meteor.isClient){
     images: function () {
         //console.log("passed through image id:" + this.img_id);
         return Images.find(); // Where Images is an FS.Collection instance
+    },
+    root_url: function() {
+        if(Meteor.isCordova)
+        {
+            return __meteor_runtime_config__.ROOT_URL;
+        }else{
+            return __meteor_runtime_config__.ROOT_URL.slice(0,-1);
+        }
     }
   });
 

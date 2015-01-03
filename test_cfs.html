@@ -16,6 +16,10 @@
 
 <template name="imageView">
     {{#each images}}
-        <img src="{{this.url}}" style="border-radius:4px;width:100%;"  alt="" />
+        {{#if Meteor.isCordova}}
+            <img src="{{this.url}}" alt="" />
+        {{else}}
+            <img src="{{root_url}}{{this.url}}" alt="" />
+        {{/if}}
     {{/each}}
 </template>
