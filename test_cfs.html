@@ -1,0 +1,21 @@
+<head>
+  <title>test_cfs</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor!</h1>
+  {{> hello}}
+</body>
+
+<template name="hello">
+    This is my current cfs uploadurl: {{fshttp}}<br>
+  <input id="upload-btn" type="file">
+
+  {{> imageView}}
+</template>
+
+<template name="imageView">
+    {{#each images}}
+        <img src="{{this.url}}" style="border-radius:4px;width:100%;"  alt="" />
+    {{/each}}
+</template>
